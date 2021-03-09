@@ -1,0 +1,15 @@
+{
+  "name": "discord-bot-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for creating a new discord bot (dynamic command handler and dynamic help command)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Parth2412",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0"
+  }
+}
