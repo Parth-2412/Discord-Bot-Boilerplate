@@ -14,6 +14,7 @@ client.prefix = prefix;
 fs.readdirSync("./commands").filter( file => file.endsWith(".js")).forEach(
     file => {
         const command = require(`./commands/${file}`);
+        if(command.permissions) command.guildOnly = true;
         client.commands.set(command.name , command);
     }
 )
@@ -29,9 +30,12 @@ client.on("message", message => {
     if (!client.commands.has(commandName)) return;
     try {
         const command = client.commands.get(commandName);
-        const permissions = command.permissions || [];
-        const authorPerms = message.channel.permissionsFor(message.author);
-        if (!authorPerms || !authorPerms.has(permissions)) return message.reply('You do not have permission(s) to do this');
+        if(command.guildOnly && message.channel.type !== "text") return message.reply("You can only use this command in the text channels of a server");
+        const permissions = command.permissions;
+        if(permissions){
+            const authorPerms = message.channel.permissionsFor(message.author);
+            if (!authorPerms || !authorPerms.has(permissions)) return message.reply('You do not have permission(s) to do this');
+        }
         if(command.argsNumber && args.length < command.argsNumber) return message.reply(`You didn't provide all arguments\n Correct usage: \`${client.prefix}${command.name} ${command.usage}\``);
         command.execute(message, args);
     } 
