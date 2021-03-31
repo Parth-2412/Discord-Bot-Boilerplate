@@ -33,11 +33,11 @@ client.on("ready", () => {
 client.on("message", message => {
 
     const guildId = message.guild?.id; 
-    const prefixes = message.client.prefixes
+    const prefixes = message.client.prefixes;
 
     if(message.guild && !prefixes.has(guildId)){
-        prefixes.set(guildId, prefix) 
-        message.client.prefixes= prefixes
+        prefixes.set(guildId, prefix) ;
+        message.client.prefixes= prefixes;
     } 
 
     const guildPrefix = prefixes.get(guildId) || prefix; 

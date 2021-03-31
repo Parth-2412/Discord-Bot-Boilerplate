@@ -12,7 +12,7 @@ module.exports = {
             if(!message.client.commands.has(commandName)) return message.reply("Command not found");
             const command = message.client.commands.get(commandName);
 
-            if(command.guildOnly && message.channel.type !== "text") return message.reply("You can only view this command in the text channels of a server")
+            if(command.guildOnly && message.channel.type !== "text") return message.reply("You can only view this command in the text channels of a server");
             if(command.permissions &&  !permissions.has(command.permissions)){
                 let reply = "You do not have permission to view this command";
                 return message.reply(reply);
@@ -23,11 +23,11 @@ module.exports = {
             if(command.permissions) embed.addField("Permissions" , command.permissions.join("\n"));
         }
         else{
-            embed.setTitle("Help")
+            embed.setTitle("Help");
             embed.setDescription("Shows a list of all my commands");
             const allCommandNames = message.client.commands.filter(command => command.guildOnly ? message.channel.type==="text" && permissions.has(command.permissions): true ).map(command => command.name);
             embed.addField("Commands" , allCommandNames.join("\n"));  
         }
-        message.channel.send(embed)
+        message.channel.send(embed);
     }
 }
