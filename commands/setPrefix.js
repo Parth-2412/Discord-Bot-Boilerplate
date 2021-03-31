@@ -6,7 +6,7 @@ module.exports = {
     permissions : ["ADMINISTRATOR"],
     execute(message, args){
         const prefix = args.shift();
-        message.client.prefix = prefix;
+        message.client.prefixes.set(message.guild.id, prefix);
         message.reply(`Prefix set to ${prefix}`);
     }
 }
